@@ -1,0 +1,109 @@
+{
+  "name": "@findeth/hdnode",
+  "version": "0.1.0",
+  "description": "Small HD wallet key derivation library",
+  "author": "Maarten Zuidhoorn <maarten@zuidhoorn.com>",
+  "homepage": "https://github.com/FindETH/hdnode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FindETH/hdnode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FindETH/hdnode/issues",
+    "email": "info@findeth.io"
+  },
+  "keywords": [
+    "ethereum",
+    "derivation",
+    "ledger",
+    "trezor",
+    "mnemonic-phrase",
+    "findeth",
+    "bip32",
+    "bip39",
+    "bip44",
+    "secp256k1"
+  ],
+  "license": "MIT",
+  "main": "lib/cjs/index.js",
+  "module": "lib/es/index.js",
+  "typings": "typings/index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": "12"
+  },
+  "files": [
+    "lib",
+    "src",
+    "typings"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "yarn run clean && yarn run build:source && yarn run build:declarations",
+    "build:source": "yarn run build:source:cjs && yarn run build:source:es",
+    "build:source:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel src --extensions '.ts' --source-maps --out-dir lib/cjs",
+    "build:source:es": "cross-env NODE_ENV=production BABEL_ENV=es babel src --extensions '.ts' --source-maps --out-dir lib/es",
+    "build:declarations": "tsc -p tsconfig.build.json",
+    "build:docs": "typedoc src",
+    "test": "jest",
+    "lint": "yarn run lint:tsc && yarn run lint:tslint && yarn run lint:prettier && yarn run lint:lockfile",
+    "lint:tsc": "tsc --noEmit",
+    "lint:tslint": "tslint --project .",
+    "lint:prettier": "prettier --check 'src/**/*.{ts,tsx}'",
+    "lint:lockfile": "lockfile-lint --type yarn --path yarn.lock --allowed-hosts yarn --validate-https --validate-checksum --validate-integrity",
+    "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
+    "prepare": "yarn run build"
+  },
+  "dependencies": {
+    "base-x": "^3.0.8",
+    "keccak": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.19",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-inline-json-import": "^0.3.2",
+    "codecov": "^3.6.1",
+    "cross-env": "^6.0.3",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "lockfile-lint": "^3.0.4",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-origin-ordered-imports-rule": "^1.2.2",
+    "typedoc": "^0.15.5",
+    "typescript": "^3.7.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "tslint --project . --fix",
+      "git add"
+    ],
+    "*.js": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
