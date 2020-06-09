@@ -1,4 +1,11 @@
-import { dehexify, toBuffer } from './buffer';
+import { dehexify, hexify, toBuffer } from './buffer';
+
+describe('hexify', () => {
+  it('gets a hexadecimal string from a buffer', () => {
+    const buffer = Buffer.from('123456abcdef', 'hex');
+    expect(hexify(buffer)).toBe('123456abcdef');
+  });
+});
 
 describe('dehexify', () => {
   it('gets a buffer from a hexadecimal string', () => {

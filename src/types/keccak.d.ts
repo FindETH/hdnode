@@ -13,5 +13,13 @@ declare module 'keccak' {
     | 'shake128'
     | 'shake256';
 
-  export default function createKeccakHash(algorithm: Algorithm): Hash;
+  class Keccak {
+    update(data: Buffer): Keccak;
+    update(data: string, encoding: string): Keccak;
+
+    digest(): Buffer;
+    digest(encoding: string): string;
+  }
+
+  export default function createKeccakHash(algorithm: Algorithm): Keccak;
 }
