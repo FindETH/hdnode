@@ -167,7 +167,7 @@ export class HDNode {
     const segments = path.split('/').slice(1);
 
     return segments.reduce<HDNode>((hdNode, segment) => {
-      const isHardened = segment.endsWith(`'`);
+      const isHardened = segment.endsWith("'");
       const index = parseInt(segment, 10);
 
       if (isHardened) {

@@ -21,7 +21,7 @@ export const hmacSHA512 = (key: Buffer, buffer: Buffer): Buffer => {
  * @param {Buffer} buffer
  * @return {Buffer}
  */
-export const sha256 = (buffer: Buffer) => {
+export const sha256 = (buffer: Buffer): Buffer => {
   return createHash('sha256')
     .update(buffer)
     .digest();
@@ -68,13 +68,7 @@ export const keccak256 = (buffer: Uint8Array): Buffer => {
  * @param {string} [digest]
  * @return {Buffer}
  */
-export const pbkdf2 = (
-  buffer: Buffer,
-  salt: Buffer,
-  iterations: number = 2048,
-  length: number = 64,
-  digest: string = 'sha512'
-): Buffer => {
+export const pbkdf2 = (buffer: Buffer, salt: Buffer, iterations = 2048, length = 64, digest = 'sha512'): Buffer => {
   return pbkdf2Sync(buffer, salt, iterations, length, digest);
 };
 
