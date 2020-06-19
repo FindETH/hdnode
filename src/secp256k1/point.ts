@@ -61,7 +61,7 @@ export class Point {
     const binaryLength = s.length - 1;
 
     const addings: Point[] = [];
-    let n: Point = this;
+    let n: Point = this; // eslint-disable-line @typescript-eslint/no-this-alias
     for (let i = binaryLength; i >= 0; i--) {
       const char = s[i];
       if (char === '1') {
@@ -87,7 +87,7 @@ export class Point {
    * @param {boolean} compact
    * @return {Buffer}
    */
-  toBuffer(compact: boolean = false): Buffer {
+  toBuffer(compact = false): Buffer {
     const length = Buffer.from(this.curve.p.toString(16), 'hex').byteLength;
     const x = bigIntToBuffer(this.x, length);
 

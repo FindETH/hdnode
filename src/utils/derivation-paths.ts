@@ -13,7 +13,7 @@ export const getIndex = (level: string): number => {
   }
 
   const item = parseInt(result[1], 10);
-  if (result[2] === `'`) {
+  if (result[2] === "'") {
     return item + HARDENED_OFFSET;
   }
 

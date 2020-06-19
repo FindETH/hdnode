@@ -33,35 +33,35 @@ const TEST_VECTORS: TestVector[] = [
           'xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi'
       },
       levels: {
-        [`m/0'`]: {
+        ["m/0'"]: {
           public:
             'xpub68Gmy5EdvgibQVfPdqkBBCHxA5htiqg55crXYuXoQRKfDBFA1WEjWgP6LHhwBZeNK1VTsfTFUHCdrfp1bgwQ9xv5ski8PX9rL2dZXvgGDnw',
           private:
             'xprv9uHRZZhk6KAJC1avXpDAp4MDc3sQKNxDiPvvkX8Br5ngLNv1TxvUxt4cV1rGL5hj6KCesnDYUhd7oWgT11eZG7XnxHrnYeSvkzY7d2bhkJ7',
           address: '0xBF6e48966d0dcf553b53e7b56CB2e0E72dca9E19'
         },
-        [`m/0'/1`]: {
+        ["m/0'/1"]: {
           public:
             'xpub6ASuArnXKPbfEwhqN6e3mwBcDTgzisQN1wXN9BJcM47sSikHjJf3UFHKkNAWbWMiGj7Wf5uMash7SyYq527Hqck2AxYysAA7xmALppuCkwQ',
           private:
             'xprv9wTYmMFdV23N2TdNG573QoEsfRrWKQgWeibmLntzniatZvR9BmLnvSxqu53Kw1UmYPxLgboyZQaXwTCg8MSY3H2EU4pWcQDnRnrVA1xe8fs',
           address: '0x29379f45F515C494483298225d1B347F73D1babF'
         },
-        [`m/0'/1/2'`]: {
+        ["m/0'/1/2'"]: {
           public:
             'xpub6D4BDPcP2GT577Vvch3R8wDkScZWzQzMMUm3PWbmWvVJrZwQY4VUNgqFJPMM3No2dFDFGTsxxpG5uJh7n7epu4trkrX7x7DogT5Uv6fcLW5',
           private:
             'xprv9z4pot5VBttmtdRTWfWQmoH1taj2axGVzFqSb8C9xaxKymcFzXBDptWmT7FwuEzG3ryjH4ktypQSAewRiNMjANTtpgP4mLTj34bhnZX7UiM',
           address: '0xd8e85FBbb4b3b3c71C4e63A5580d0c12fb4D2f71'
         },
-        [`m/0'/1/2'/2`]: {
+        ["m/0'/1/2'/2"]: {
           public:
             'xpub6FHa3pjLCk84BayeJxFW2SP4XRrFd1JYnxeLeU8EqN3vDfZmbqBqaGJAyiLjTAwm6ZLRQUMv1ZACTj37sR62cfN7fe5JnJ7dh8zL4fiyLHV',
           private:
             'xprvA2JDeKCSNNZky6uBCviVfJSKyQ1mDYahRjijr5idH2WwLsEd4Hsb2Tyh8RfQMuPh7f7RtyzTtdrbdqqsunu5Mm3wDvUAKRHSC34sJ7in334',
           address: '0x1d3462d2319Ac0bfC1A52e177A9d372492752130'
         },
-        [`m/0'/1/2'/2/1000000000`]: {
+        ["m/0'/1/2'/2/1000000000"]: {
           public:
             'xpub6H1LXWLaKsWFhvm6RVpEL9P4KfRZSW7abD2ttkWP3SSQvnyA8FSVqNTEcYFgJS2UaFcxupHiYkro49S8yGasTvXEYBVPamhGW6cFJodrTHy',
           private:
@@ -83,35 +83,35 @@ const TEST_VECTORS: TestVector[] = [
           'xprv9s21ZrQH143K31xYSDQpPDxsXRTUcvj2iNHm5NUtrGiGG5e2DtALGdso3pGz6ssrdK4PFmM8NSpSBHNqPqm55Qn3LqFtT2emdEXVYsCzC2U'
       },
       levels: {
-        [`m/0`]: {
+        ['m/0']: {
           public:
             'xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH',
           private:
             'xprv9vHkqa6EV4sPZHYqZznhT2NPtPCjKuDKGY38FBWLvgaDx45zo9WQRUT3dKYnjwih2yJD9mkrocEZXo1ex8G81dwSM1fwqWpWkeS3v86pgKt',
           address: '0xaBBcd4471a0b6E76A2f6fdc44008fE53831E208e'
         },
-        [`m/0/2147483647'`]: {
+        ["m/0/2147483647'"]: {
           public:
             'xpub6ASAVgeehLbnwdqV6UKMHVzgqAG8Gr6riv3Fxxpj8ksbH9ebxaEyBLZ85ySDhKiLDBrQSARLq1uNRts8RuJiHjaDMBU4Zn9h8LZNnBC5y4a',
           private:
             'xprv9wSp6B7kry3Vj9m1zSnLvN3xH8RdsPP1Mh7fAaR7aRLcQMKTR2vidYEeEg2mUCTAwCd6vnxVrcjfy2kRgVsFawNzmjuHc2YmYRmagcEPdU9',
           address: '0x40EF2cEF1B2588AE862e7A511162EC7ff33C30fD'
         },
-        [`m/0/2147483647'/1`]: {
+        ["m/0/2147483647'/1"]: {
           public:
             'xpub6DF8uhdarytz3FWdA8TvFSvvAh8dP3283MY7p2V4SeE2wyWmG5mg5EwVvmdMVCQcoNJxGoWaU9DCWh89LojfZ537wTfunKau47EL2dhHKon',
           private:
             'xprv9zFnWC6h2cLgpmSA46vutJzBcfJ8yaJGg8cX1e5StJh45BBciYTRXSd25UEPVuesF9yog62tGAQtHjXajPPdbRCHuWS6T8XA2ECKADdw4Ef',
           address: '0x3F2E8905488f795EbC84A39560d133971CCf9b50'
         },
-        [`m/0/2147483647'/1/2147483646'`]: {
+        ["m/0/2147483647'/1/2147483646'"]: {
           public:
             'xpub6ERApfZwUNrhLCkDtcHTcxd75RbzS1ed54G1LkBUHQVHQKqhMkhgbmJbZRkrgZw4koxb5JaHWkY4ALHY2grBGRjaDMzQLcgJvLJuZZvRcEL',
           private:
             'xprvA1RpRA33e1JQ7ifknakTFpgNXPmW2YvmhqLQYMmrj4xJXXWYpDPS3xz7iAxn8L39njGVyuoseXzU6rcxFLJ8HFsTjSyQbLYnMpCqE2VbFWc',
           address: '0xa5016Fdf975F767e4E6F355c7a82EFA69bf42ea7'
         },
-        [`m/0/2147483647'/1/2147483646'/2`]: {
+        ["m/0/2147483647'/1/2147483646'/2"]: {
           public:
             'xpub6FnCn6nSzZAw5Tw7cgR9bi15UV96gLZhjDstkXXxvCLsUXBGXPdSnLFbdpq8p9HmGsApME5hQTZ3emM2rnY5agb9rXpVGyy3bdW6EEgAtqt',
           private:
@@ -133,7 +133,7 @@ const TEST_VECTORS: TestVector[] = [
           'xprv9s21ZrQH143K25QhxbucbDDuQ4naNntJRi4KUfWT7xo4EKsHt2QJDu7KXp1A3u7Bi1j8ph3EGsZ9Xvz9dGuVrtHHs7pXeTzjuxBrCmmhgC6'
       },
       levels: {
-        [`m/0'`]: {
+        ["m/0'"]: {
           public:
             'xpub68NZiKmJWnxxS6aaHmn81bvJeTESw724CRDs6HbuccFQN9Ku14VQrADWgqbhhTHBaohPX4CjNLf9fq9MYo6oDaPPLPxSb7gwQN3ih19Zm4Y',
           private:
@@ -332,16 +332,16 @@ describe('HDNode', () => {
       );
       expect(() => hdNode.derive('m/')).toThrow();
       expect(() => hdNode.derive('0/0')).toThrow();
-      expect(() => hdNode.derive(`m/0'/'0`)).toThrow();
+      expect(() => hdNode.derive("m/0'/'0")).toThrow();
     });
 
     it('throws when deriving a hardened index without private key', () => {
       const hdNode = HDNode.fromExtendedKey(
         'xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8'
       );
-      expect(() => hdNode.derive(`m/0'`)).toThrow();
-      expect(() => hdNode.derive(`0/0/0'`)).toThrow();
-      expect(() => hdNode.derive(`m/0'/0/0'`)).toThrow();
+      expect(() => hdNode.derive("m/0'")).toThrow();
+      expect(() => hdNode.derive("0/0/0'")).toThrow();
+      expect(() => hdNode.derive("m/0'/0/0'")).toThrow();
     });
 
     it('derives a child extended private key based on a derivation path', () => {
