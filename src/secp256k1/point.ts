@@ -64,6 +64,7 @@ export const double = (curve: Curve, point: Point): Point => {
  * @param {Curve} curve
  * @param {Point} point
  * @param {Buffer | bigint} value
+ * @return {Point}
  */
 export const multiply = (curve: Curve, point: Point, value: Buffer | bigint): Point => {
   if (typeof value !== 'bigint') {
@@ -74,27 +75,22 @@ export const multiply = (curve: Curve, point: Point, value: Buffer | bigint): Po
     return point;
   }
 
-  const s = value.toString(2);
-  const binaryLength = s.length - 1;
+  return value
+    .toString(2)
+    .split('')
+    .reverse()
+    .reduce<[Point, Point | undefined]>(
+      ([point, multipliedPoint], character) => {
+        const doubledPoint = double(curve, point);
 
-  const addings: Point[] = [];
-  for (let i = binaryLength; i >= 0; i--) {
-    const char = s[i];
-    if (char === '1') {
-      addings.push(point);
-    }
+        if (character === '1') {
+          return [doubledPoint, (multipliedPoint && add(curve, point, multipliedPoint)) || point];
+        }
 
-    point = double(curve, point);
-  }
-
-  let newPoint = addings[0];
-  addings.shift();
-  while (addings[0]) {
-    newPoint = add(curve, newPoint, addings[0]);
-    addings.shift();
-  }
-
-  return newPoint;
+        return [doubledPoint, multipliedPoint];
+      },
+      [point, undefined]
+    )[1]!;
 };
 
 /**
