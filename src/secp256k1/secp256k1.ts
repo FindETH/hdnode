@@ -1,7 +1,20 @@
 import { bigIntToBuffer, bufferToBigInt } from '../utils';
-import { Curve } from './index';
+import { Curve, decodePoint } from './curve';
+import { add, multiply, toBuffer } from './point';
 
-const curve = new Curve();
+/**
+ * All parameters defined by the Secp256k1 curve.
+ */
+export const secp256k1: Curve = {
+  g: {
+    x: BigInt('0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798'),
+    y: BigInt('0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8')
+  },
+  a: 0n,
+  b: 7n,
+  n: BigInt('0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141'),
+  p: BigInt('0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f')
+};
 
 /**
  * Derive the public key from a private key. Returns the public key in compressed form.
@@ -10,14 +23,14 @@ const curve = new Curve();
  * @return {Buffer}
  */
 export const getPublicKey = (privateKey: Buffer): Buffer => {
-  const point = curve.g.multiply(privateKey);
+  const point = multiply(secp256k1, secp256k1.g, privateKey);
 
   // TODO
   /*if (point.infinite) {
     throw new Error('Point is infinite');
   }*/
 
-  return point.toBuffer(true);
+  return toBuffer(secp256k1, point, true);
 };
 
 /**
@@ -32,11 +45,11 @@ export const privateAdd = (privateKey: Buffer, tweakBuffer: Buffer): Buffer => {
   const key = bufferToBigInt(privateKey);
   const tweak = bufferToBigInt(tweakBuffer);
 
-  if (tweak >= curve.n) {
+  if (tweak >= secp256k1.n) {
     throw new Error('Resulting key is invalid: tweak is larger than n');
   }
 
-  const newKey = (key + tweak) % curve.n;
+  const newKey = (key + tweak) % secp256k1.n;
   if (newKey === 0n) {
     throw new Error('Resulting key is invalid: new key is 0');
   }
@@ -53,22 +66,22 @@ export const privateAdd = (privateKey: Buffer, tweakBuffer: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const publicAdd = (publicKey: Buffer, tweakBuffer: Buffer): Buffer => {
-  const key = curve.decodePoint(publicKey);
+  const key = decodePoint(secp256k1, publicKey);
   const tweak = bufferToBigInt(tweakBuffer);
 
-  if (tweak >= curve.n) {
+  if (tweak >= secp256k1.n) {
     throw new Error('Resulting key is invalid: tweak is larger than n');
   }
 
-  const q = curve.g.multiply(tweak);
-  const point = key.add(q);
+  const q = multiply(secp256k1, secp256k1.g, tweak);
+  const point = add(secp256k1, key, q);
 
   // TODO
   /*if (point.infinite) {
     throw new Error('Resulting key is invalid: point is at infinity');
   }*/
 
-  return point.toBuffer(true);
+  return toBuffer(secp256k1, point, true);
 };
 
 /**
@@ -78,9 +91,9 @@ export const publicAdd = (publicKey: Buffer, tweakBuffer: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const compressPublicKey = (publicKey: Buffer): Buffer => {
-  const key = curve.decodePoint(publicKey);
+  const key = decodePoint(secp256k1, publicKey);
 
-  return key.toBuffer(true);
+  return toBuffer(secp256k1, key, true);
 };
 
 /**
@@ -90,7 +103,7 @@ export const compressPublicKey = (publicKey: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const decompressPublicKey = (publicKey: Buffer): Buffer => {
-  const key = curve.decodePoint(publicKey);
+  const key = decodePoint(secp256k1, publicKey);
 
-  return key.toBuffer(false);
+  return toBuffer(secp256k1, key, false);
 };

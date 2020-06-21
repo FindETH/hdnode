@@ -1,18 +1,17 @@
-import { Curve } from './curve';
+import { decodePoint, getPoint, getPointFromX } from './curve';
+import { secp256k1 } from './secp256k1';
 
 describe('Curve', () => {
   describe('getPoint', () => {
     it('returns a point from an x and y bigint', () => {
-      const curve = new Curve();
-      const point = curve.getPoint(10n, 20n);
+      const point = getPoint(10n, 20n);
 
       expect(point.x).toBe(10n);
       expect(point.y).toBe(20n);
     });
 
     it('returns a point from an x and y buffer', () => {
-      const curve = new Curve();
-      const point = curve.getPoint(Buffer.from([0x0a]), Buffer.from([0x14]));
+      const point = getPoint(Buffer.from([0x0a]), Buffer.from([0x14]));
 
       expect(point.x).toBe(10n);
       expect(point.y).toBe(20n);
@@ -21,9 +20,9 @@ describe('Curve', () => {
 
   describe('getPointFromX', () => {
     it('returns a point from an even x buffer', () => {
-      const curve = new Curve();
       // 0x026557fdda1d5d43d79611f784780471f086d58e8126b8c40acb82272a7712e7f2
-      const point = curve.getPointFromX(
+      const point = getPointFromX(
+        secp256k1,
         Buffer.from('6557fdda1d5d43d79611f784780471f086d58e8126b8c40acb82272a7712e7f2', 'hex'),
         false
       );
@@ -33,9 +32,9 @@ describe('Curve', () => {
     });
 
     it('returns a point from an odd x buffer', () => {
-      const curve = new Curve();
       // 0x035a784662a4a20a65bf6aab9ae98a6c068a81c52e4b032c0fb5400c706cfccc56
-      const point = curve.getPointFromX(
+      const point = getPointFromX(
+        secp256k1,
         Buffer.from('5a784662a4a20a65bf6aab9ae98a6c068a81c52e4b032c0fb5400c706cfccc56', 'hex'),
         true
       );
@@ -47,8 +46,8 @@ describe('Curve', () => {
 
   describe('decodePoint', () => {
     it('decodes a SEC1 encoded buffer', () => {
-      const curve = new Curve();
-      const point = curve.decodePoint(
+      const point = decodePoint(
+        secp256k1,
         Buffer.from('035a784662a4a20a65bf6aab9ae98a6c068a81c52e4b032c0fb5400c706cfccc56', 'hex')
       );
 
