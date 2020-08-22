@@ -1,17 +1,19 @@
-import { DERIVATION_PATH, HARDENED_OFFSET, MASTER_KEY, PRIVATE_KEY_VERSION, PUBLIC_KEY_VERSION } from './constants';
-import { isValidMnemonic, mnemonicToSeed } from './mnemonics';
-import { compressPublicKey, decompressPublicKey, getPublicKey, privateAdd, publicAdd } from './secp256k1';
 import {
-  decodeBase58,
+  compressPublicKey,
+  decompressPublicKey,
   dehexify,
-  encodeBase58,
-  getIndex,
+  getPublicKey,
   hmacSHA512,
   keccak256,
+  numberToBuffer,
+  privateAdd,
+  publicAdd,
   ripemd160,
-  toBuffer,
   toChecksumAddress
-} from './utils';
+} from '@findeth/secp256k1';
+import { DERIVATION_PATH, HARDENED_OFFSET, MASTER_KEY, PRIVATE_KEY_VERSION, PUBLIC_KEY_VERSION } from './constants';
+import { isValidMnemonic, mnemonicToSeed } from './mnemonics';
+import { decodeBase58, encodeBase58, getIndex } from './utils';
 
 export interface ExtendedPublicKey {
   publicKey: string;
@@ -219,7 +221,7 @@ export class HDNode {
    * @return {Buffer}
    */
   private getChildData(index: number): Buffer {
-    const indexBuffer = toBuffer(index, 4);
+    const indexBuffer = numberToBuffer(index, 4);
 
     if (index >= HARDENED_OFFSET) {
       if (!this.privateKey) {
@@ -240,10 +242,10 @@ export class HDNode {
    * @return {string}
    */
   private serialise(version: number, key: Buffer): string {
-    const versionBuffer = toBuffer(version, 4);
-    const depth = toBuffer(this.depth, 1);
-    const parentFingerprint = toBuffer(this.parentFingerprint, 4);
-    const index = toBuffer(this.index, 4);
+    const versionBuffer = numberToBuffer(version, 4);
+    const depth = numberToBuffer(this.depth, 1);
+    const parentFingerprint = numberToBuffer(this.parentFingerprint, 4);
+    const index = numberToBuffer(this.index, 4);
 
     const buffer = Buffer.concat([versionBuffer, depth, parentFingerprint, index, this.chainCode, key]);
 

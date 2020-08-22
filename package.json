@@ -55,6 +55,7 @@
     "prepare": "yarn run build"
   },
   "dependencies": {
+    "@findeth/secp256k1": "^0.1.0",
     "base-x": "^3.0.8",
     "keccak": "^3.0.0"
   },

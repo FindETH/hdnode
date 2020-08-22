@@ -1,5 +1,5 @@
+import { sha256 } from '@findeth/secp256k1';
 import baseX from 'base-x';
-import { sha256 } from './hash';
 
 const BASE_58_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 export const base58 = baseX(BASE_58_CHARACTERS);

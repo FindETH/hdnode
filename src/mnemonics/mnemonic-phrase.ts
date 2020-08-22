@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto';
-import { pbkdf2, sha256 } from '../utils';
+import { pbkdf2, sha256 } from '@findeth/secp256k1';
 import { ENGLISH_WORDLIST } from './wordlists';
 
 export type Bit = 0 | 1;
