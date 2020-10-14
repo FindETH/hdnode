@@ -51,12 +51,13 @@
     "lint:source": "eslint . --ignore-path .gitignore --ext .ts,.tsx,.js,.jsx",
     "lint:format": "prettier --check --ignore-path .gitignore '**/*.{ts,tsx,js,json,yml}'",
     "lint:lockfile": "lockfile-lint --type yarn --path yarn.lock --allowed-hosts yarn --validate-https --validate-checksum --validate-integrity",
-    "format": "prettier --write --ignore-path .gitignore '**/*.{ts,tsx,js,json}'",
+    "format": "prettier --write --ignore-path .gitignore '**/*.{ts,tsx,js,json,yml}'",
     "prepare": "yarn run build"
   },
   "dependencies": {
-    "@findeth/secp256k1": "^0.1.0",
+    "@findeth/secp256k1": "^0.3.0",
     "base-x": "^3.0.8",
+    "buffer": "^5.6.0",
     "keccak": "^3.0.0"
   },
   "devDependencies": {

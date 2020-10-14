@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { decodeBase58, encodeBase58 } from './base58';
 
 describe('encode', () => {

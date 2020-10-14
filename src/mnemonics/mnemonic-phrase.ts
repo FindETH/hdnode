@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { randomBytes } from 'crypto';
 import { pbkdf2, sha256 } from '@findeth/secp256k1';
 import { ENGLISH_WORDLIST } from './wordlists';

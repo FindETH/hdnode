@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { sha256 } from '@findeth/secp256k1';
 import baseX from 'base-x';
 
