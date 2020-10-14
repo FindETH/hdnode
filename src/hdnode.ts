@@ -1,16 +1,14 @@
 import { Buffer } from 'buffer';
 import {
   compressPublicKey,
-  decompressPublicKey,
   dehexify,
+  getAddress,
   getPublicKey,
   hmacSHA512,
-  keccak256,
   numberToBuffer,
   privateAdd,
   publicAdd,
-  ripemd160,
-  toChecksumAddress
+  ripemd160
 } from '@findeth/secp256k1';
 import { DERIVATION_PATH, HARDENED_OFFSET, MASTER_KEY, PRIVATE_KEY_VERSION, PUBLIC_KEY_VERSION } from './constants';
 import { isValidMnemonic, mnemonicToSeed } from './mnemonics';
@@ -144,12 +142,7 @@ export class HDNode {
    * @return {string}
    */
   get address(): string {
-    const publicKey = decompressPublicKey(this.publicKey).subarray(1);
-    const address = keccak256(publicKey)
-      .subarray(-20)
-      .toString('hex');
-
-    return toChecksumAddress(address);
+    return getAddress(this.publicKey);
   }
 
   /**

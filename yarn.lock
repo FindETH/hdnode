@@ -989,10 +989,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@findeth/secp256k1@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@findeth/secp256k1/-/secp256k1-0.3.0.tgz#132b15ab97d7b85b416657f9e7d31bee426a6f96"
-  integrity sha512-oLMj97hJK5NBRHcn1gRVZwABxglnu7hkz83+62apUO0inHLMsnvjyGba0Rg5oxCmR6MsBbga9K+sGuWszFi8FQ==
+"@findeth/secp256k1@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@findeth/secp256k1/-/secp256k1-0.3.1.tgz#c499170c88bd9e56e737d9e8c1879ff17d700010"
+  integrity sha512-ZlydfWUPfgSBoDQswpr0r1VowNOMu55dShAVNLYurKhYxhtXUZ6fg25prf/EW3OsgLAInn3Tao6tFC4SUXtWAw==
   dependencies:
     buffer "^5.6.0"
     create-hash "^1.2.0"
