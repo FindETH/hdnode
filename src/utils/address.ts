@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 import { hexify } from './buffer';
-import { publicToBuffer, secp256k1 } from './elliptic';
+import { decompressPublicKey } from './elliptic';
 import { keccak256 } from './hash';
 
 /**
@@ -21,9 +21,14 @@ export const toChecksumAddress = (address: string): string => {
   }, '0x');
 };
 
+/**
+ * Get the Ethereum address for a public key.
+ *
+ * @param {Buffer} publicKey
+ * @return {string}
+ */
 export const getAddress = (publicKey: Buffer): string => {
-  const keyPair = secp256k1.keyFromPublic(publicKey);
-  const buffer = publicToBuffer(keyPair, false).subarray(1);
+  const buffer = decompressPublicKey(publicKey).subarray(1);
 
   const hash = hexify(keccak256(buffer).subarray(-20));
   return toChecksumAddress(hash);
