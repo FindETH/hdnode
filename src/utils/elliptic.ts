@@ -89,14 +89,14 @@ export const privateAdd = (privateKey: Buffer, tweak: Buffer): Buffer => {
       throw new Error('Invalid resulting number');
     }
 
-    return tweaked.toBuffer();
+    return Buffer.from(tweaked.toArray());
   }
 
   if (add.isZero()) {
     throw new Error('Invalid resulting number');
   }
 
-  return add.toBuffer();
+  return Buffer.from(add.toArray());
 };
 
 /**
