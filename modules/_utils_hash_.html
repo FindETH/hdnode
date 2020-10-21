@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;utils/derivation-paths&quot; | @findeth/hdnode - v0.4.0</title>
+	<title>&quot;utils/hash&quot; | @findeth/hdnode - v0.4.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_utils_derivation_paths_.html">&quot;utils/derivation-paths&quot;</a>
+					<a href="_utils_hash_.html">&quot;utils/hash&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;utils/derivation-paths&quot;</h1>
+			<h1>External module &quot;utils/hash&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,11 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_derivation_paths_.html#getindex" class="tsd-kind-icon">get<wbr>Index</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_hash_.html#hmacsha512" class="tsd-kind-icon">hmacSHA512</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_hash_.html#keccak256" class="tsd-kind-icon">keccak256</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_hash_.html#pbkdf2" class="tsd-kind-icon">pbkdf2</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_hash_.html#ripemd160" class="tsd-kind-icon">ripemd160</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_hash_.html#sha256" class="tsd-kind-icon">sha256</a></li>
 							</ul>
 						</section>
 					</div>
@@ -82,30 +86,157 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="getindex" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Index</h3>
+					<a name="hmacsha512" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> hmacSHA512</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Index<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">hmacSHA512<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/derivation-paths.ts#L9">utils/derivation-paths.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/hash.ts#L15">utils/hash.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the index from a derivation path level.</p>
+									<p>Hash a buffer with provided key using HMAC-SHA512.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>level: <span class="tsd-signature-type">string</span></h5>
+									<h5>key: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="keccak256" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> keccak256</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">keccak256<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/hash.ts#L55">utils/hash.ts:55</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Hash a buffer using KECCAK256.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="pbkdf2" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> pbkdf2</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">pbkdf2<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, salt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, iterations<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, digest<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/hash.ts#L74">utils/hash.ts:74</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Derive a key from a buffer and salt. Defaults to 2048 iterations, 64 byte key length and SHA512 as digest.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+								<li>
+									<h5>salt: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> iterations: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;2048</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> length: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;64</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> digest: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;sha512&quot;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="ripemd160" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ripemd160</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">ripemd160<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/hash.ts#L39">utils/hash.ts:39</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Hash a buffer using RIPEMD160.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="sha256" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> sha256</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">sha256<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/FindETH/hdnode/blob/f1303f6/src/utils/hash.ts#L27">utils/hash.ts:27</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Hash a buffer using SHA256.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -147,13 +278,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_utils_buffer_.html">&quot;utils/buffer&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_utils_derivation_paths_.html">&quot;utils/derivation-<wbr>paths&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_utils_elliptic_.html">&quot;utils/elliptic&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_utils_hash_.html">&quot;utils/hash&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -170,7 +301,19 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_utils_derivation_paths_.html#getindex" class="tsd-kind-icon">get<wbr>Index</a>
+						<a href="_utils_hash_.html#hmacsha512" class="tsd-kind-icon">hmacSHA512</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_utils_hash_.html#keccak256" class="tsd-kind-icon">keccak256</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_utils_hash_.html#pbkdf2" class="tsd-kind-icon">pbkdf2</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_utils_hash_.html#ripemd160" class="tsd-kind-icon">ripemd160</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_utils_hash_.html#sha256" class="tsd-kind-icon">sha256</a>
 					</li>
 				</ul>
 			</nav>
