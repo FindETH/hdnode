@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 import { randomBytes } from 'crypto';
-import { pbkdf2, sha256 } from '@findeth/secp256k1';
+import { pbkdf2, sha256 } from '../utils';
 import { ENGLISH_WORDLIST } from './wordlists';
 
 export type Bit = 0 | 1;

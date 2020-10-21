@@ -1,18 +1,20 @@
 import { Buffer } from 'buffer';
-import {
-  compressPublicKey,
-  dehexify,
-  getAddress,
-  getPublicKey,
-  hmacSHA512,
-  numberToBuffer,
-  privateAdd,
-  publicAdd,
-  ripemd160
-} from '@findeth/secp256k1';
 import { DERIVATION_PATH, HARDENED_OFFSET, MASTER_KEY, PRIVATE_KEY_VERSION, PUBLIC_KEY_VERSION } from './constants';
 import { isValidMnemonic, mnemonicToSeed } from './mnemonics';
-import { decodeBase58, encodeBase58, getIndex } from './utils';
+import {
+  decodeBase58,
+  dehexify,
+  encodeBase58,
+  getAddress,
+  getIndex,
+  numberToBuffer,
+  ripemd160,
+  compressPublicKey,
+  getPublicKey,
+  privateAdd,
+  publicAdd,
+  hmacSHA512
+} from './utils';
 
 export interface ExtendedPublicKey {
   publicKey: string;
