@@ -352,6 +352,7 @@ describe('HDNode', () => {
 
         if (vector.expected.levels) {
           for (const path of Object.keys(vector.expected.levels)) {
+            // eslint-disable-next-line jest/no-conditional-expect
             expect(hdNode.derive(path).extendedPrivateKey).toBe(vector.expected.levels[path].private);
           }
         }
@@ -379,6 +380,7 @@ describe('HDNode', () => {
         if (vector.expected.levels) {
           for (const path of Object.keys(vector.expected.levels)) {
             if (vector.expected.levels[path].address) {
+              // eslint-disable-next-line jest/no-conditional-expect
               expect(hdNode.derive(path).address).toBe(vector.expected.levels[path].address);
             }
           }
