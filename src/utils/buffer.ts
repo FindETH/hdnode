@@ -8,7 +8,7 @@ import { Buffer } from 'buffer';
  */
 export const hexify = (data: Uint8Array): string => {
   return Array.from(data)
-    .map(n => `0${n.toString(16)}`.slice(-2))
+    .map((n) => `0${n.toString(16)}`.slice(-2))
     .join('');
 };
 

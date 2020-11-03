@@ -45,9 +45,7 @@ export const entropyToMnemonic = (entropy: Buffer): string => {
   const checksum = getChecksum(entropy);
   const bits = [...bufferToBits(entropy), ...checksum];
 
-  return chunk(bits, 11)
-    .map(getMnemonicWord)
-    .join(' ');
+  return chunk(bits, 11).map(getMnemonicWord).join(' ');
 };
 
 /**
@@ -78,8 +76,8 @@ export const mnemonicToEntropy = (mnemonic: string): Buffer => {
   }
 
   const bits = words
-    .map(word => ENGLISH_WORDLIST.indexOf(word))
-    .map(index => {
+    .map((word) => ENGLISH_WORDLIST.indexOf(word))
+    .map((index) => {
       if (index === -1) {
         throw new Error('Invalid mnemonic phrase');
       }
@@ -88,7 +86,7 @@ export const mnemonicToEntropy = (mnemonic: string): Buffer => {
     })
     .join('')
     .split('')
-    .map(bit => parseInt(bit, 2) as Bit);
+    .map((bit) => parseInt(bit, 2) as Bit);
 
   const checksumLength = bits.length % 32;
   const entropy = bits.slice(0, -checksumLength);
@@ -139,10 +137,10 @@ export const getMnemonicWord = (bits: Bit[]): string => {
  */
 export const bufferToBits = (buffer: Buffer): Bit[] => {
   const bits = Array.from(buffer)
-    .map(byte => byte.toString(2).padStart(8, '0'))
+    .map((byte) => byte.toString(2).padStart(8, '0'))
     .join('');
 
-  return bits.split('').map(bit => parseInt(bit, 2) as Bit);
+  return bits.split('').map((bit) => parseInt(bit, 2) as Bit);
 };
 
 /**
@@ -153,8 +151,8 @@ export const bufferToBits = (buffer: Buffer): Bit[] => {
  */
 export const bitsToBuffer = (bits: Bit[]): Buffer => {
   const bytes = chunk(bits, 8)
-    .map(array => array.join(''))
-    .map(array => parseInt(array, 2));
+    .map((array) => array.join(''))
+    .map((array) => parseInt(array, 2));
 
   return Buffer.from(bytes);
 };

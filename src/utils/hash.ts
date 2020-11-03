@@ -13,9 +13,7 @@ import { hexify } from './buffer';
  * @return {Buffer}
  */
 export const hmacSHA512 = (key: Buffer, buffer: Buffer): Buffer => {
-  return createHmac('sha512', key)
-    .update(buffer)
-    .digest();
+  return createHmac('sha512', key).update(buffer).digest();
 };
 
 /**
@@ -25,9 +23,7 @@ export const hmacSHA512 = (key: Buffer, buffer: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const sha256 = (buffer: Buffer): Buffer => {
-  return createHash('sha256')
-    .update(buffer)
-    .digest();
+  return createHash('sha256').update(buffer).digest();
 };
 
 /**
@@ -37,13 +33,7 @@ export const sha256 = (buffer: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const ripemd160 = (buffer: Buffer): Buffer => {
-  return createHash('ripemd160')
-    .update(
-      createHash('sha256')
-        .update(buffer)
-        .digest()
-    )
-    .digest();
+  return createHash('ripemd160').update(createHash('sha256').update(buffer).digest()).digest();
 };
 
 /**
@@ -53,12 +43,7 @@ export const ripemd160 = (buffer: Buffer): Buffer => {
  * @return {Buffer}
  */
 export const keccak256 = (buffer: Buffer): Buffer => {
-  return Buffer.from(
-    createKeccakHash('keccak256')
-      .update(hexify(buffer), 'hex')
-      .digest('hex'),
-    'hex'
-  );
+  return Buffer.from(createKeccakHash('keccak256').update(hexify(buffer), 'hex').digest('hex'), 'hex');
 };
 
 /**
