@@ -65,9 +65,7 @@ export class HDNode {
 
     const publicKey = compressPublicKey(dehexify(childKey.publicKey));
     const chainCode = dehexify(childKey.chainCode);
-    const parentFingerprint = ripemd160(dehexify(parentKey.publicKey))
-      .slice(0, 4)
-      .readUInt32BE(0);
+    const parentFingerprint = ripemd160(dehexify(parentKey.publicKey)).slice(0, 4).readUInt32BE(0);
     const index = getIndex(levels.slice(-1)[0]);
 
     return new HDNode(levels.length, index, chainCode, publicKey, undefined, parentFingerprint);
@@ -115,9 +113,7 @@ export class HDNode {
     readonly privateKey?: Buffer,
     readonly parentFingerprint: number = 0
   ) {
-    this.fingerprint = ripemd160(publicKey)
-      .slice(0, 4)
-      .readUInt32BE(0);
+    this.fingerprint = ripemd160(publicKey).slice(0, 4).readUInt32BE(0);
   }
 
   /**
