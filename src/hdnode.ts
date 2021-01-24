@@ -1,19 +1,20 @@
-import { Buffer } from 'buffer';
 import { DERIVATION_PATH, HARDENED_OFFSET, MASTER_KEY, PRIVATE_KEY_VERSION, PUBLIC_KEY_VERSION } from './constants';
 import { isValidMnemonic, mnemonicToSeed } from './mnemonics';
 import {
   decodeBase58,
-  dehexify,
+  fromHex,
   encodeBase58,
   getAddress,
   getIndex,
   numberToBuffer,
-  ripemd160,
   compressPublicKey,
   getPublicKey,
   privateAdd,
   publicAdd,
-  hmacSHA512
+  hmacSHA512,
+  toBuffer,
+  getFingerprint,
+  concat
 } from './utils';
 
 export interface ExtendedPublicKey {
@@ -40,11 +41,11 @@ export class HDNode {
   /**
    * Get an instance of HDNode from an arbitrary seed.
    *
-   * @param {Buffer} seed
+   * @param {string | ArrayBufferLike} seed
    * @return {HDNode}
    */
-  static fromSeed(seed: Buffer): HDNode {
-    const buffer = hmacSHA512(MASTER_KEY, seed);
+  static fromSeed(seed: string | ArrayBufferLike): HDNode {
+    const buffer = hmacSHA512(MASTER_KEY, toBuffer(seed));
 
     const privateKey = buffer.slice(0, 32);
     const publicKey = getPublicKey(privateKey);
@@ -56,16 +57,16 @@ export class HDNode {
   /**
    * Get an instance of HDNode from a parent extended public key and child extended public key.
    *
-   * @param derivationPath
-   * @param parentKey
-   * @param childKey
+   * @param {string} derivationPath
+   * @param {ExtendedPublicKey} parentKey
+   * @param {ExtendedPublicKey} childKey
    */
   static fromParentChildKey(derivationPath: string, parentKey: ExtendedPublicKey, childKey: ExtendedPublicKey): HDNode {
     const levels = derivationPath.split('/');
 
-    const publicKey = compressPublicKey(dehexify(childKey.publicKey));
-    const chainCode = dehexify(childKey.chainCode);
-    const parentFingerprint = ripemd160(dehexify(parentKey.publicKey)).slice(0, 4).readUInt32BE(0);
+    const publicKey = compressPublicKey(fromHex(childKey.publicKey));
+    const chainCode = fromHex(childKey.chainCode);
+    const parentFingerprint = getFingerprint(fromHex(parentKey.publicKey));
     const index = getIndex(levels.slice(-1)[0]);
 
     return new HDNode(levels.length, index, chainCode, publicKey, undefined, parentFingerprint);
@@ -79,18 +80,20 @@ export class HDNode {
    */
   static fromExtendedKey(extendedKey: string): HDNode {
     const buffer = decodeBase58(extendedKey);
+    const dataView = new DataView(buffer.buffer);
+
     if (buffer.length !== 78) {
       throw new Error(`Invalid extended key: expected length 78, got ${buffer.length}`);
     }
 
-    const version = buffer.readUInt32BE(0);
+    const version = dataView.getUint32(0);
     if (version !== PUBLIC_KEY_VERSION && version !== PRIVATE_KEY_VERSION) {
       throw new Error('Invalid extended key: expected public of private version');
     }
 
-    const depth = buffer.readUInt8(4);
-    const parentFingerprint = buffer.readUInt32BE(5);
-    const index = buffer.readUInt32BE(9);
+    const depth = dataView.getUint8(4);
+    const parentFingerprint = dataView.getUint32(5);
+    const index = dataView.getUint32(9);
     const chainCode = buffer.slice(13, 45);
     const key = buffer.slice(45);
 
@@ -108,12 +111,12 @@ export class HDNode {
   constructor(
     readonly depth: number,
     readonly index: number,
-    readonly chainCode: Buffer,
-    readonly publicKey: Buffer,
-    readonly privateKey?: Buffer,
+    readonly chainCode: Uint8Array,
+    readonly publicKey: Uint8Array,
+    readonly privateKey?: Uint8Array,
     readonly parentFingerprint: number = 0
   ) {
-    this.fingerprint = ripemd160(publicKey).slice(0, 4).readUInt32BE(0);
+    this.fingerprint = getFingerprint(publicKey);
   }
 
   /**
@@ -131,7 +134,7 @@ export class HDNode {
       throw new Error('No private key');
     }
 
-    return this.serialise(PRIVATE_KEY_VERSION, Buffer.concat([Buffer.alloc(1, 0), this.privateKey]));
+    return this.serialise(PRIVATE_KEY_VERSION, concat([new Uint8Array([0x00]), this.privateKey]));
   }
 
   /**
@@ -212,7 +215,7 @@ export class HDNode {
    * @param {number} index
    * @return {Buffer}
    */
-  private getChildData(index: number): Buffer {
+  private getChildData(index: number): Uint8Array {
     const indexBuffer = numberToBuffer(index, 4);
 
     if (index >= HARDENED_OFFSET) {
@@ -220,10 +223,10 @@ export class HDNode {
         throw new Error('Cannot derive a hardened child key without a private key');
       }
 
-      return Buffer.concat([Buffer.alloc(1, 0x0), this.privateKey, indexBuffer]);
+      return concat([new Uint8Array([0x00]), this.privateKey, indexBuffer]);
     }
 
-    return Buffer.concat([this.publicKey, indexBuffer]);
+    return concat([this.publicKey, indexBuffer]);
   }
 
   /**
@@ -233,13 +236,13 @@ export class HDNode {
    * @param {Buffer} key
    * @return {string}
    */
-  private serialise(version: number, key: Buffer): string {
+  private serialise(version: number, key: Uint8Array): string {
     const versionBuffer = numberToBuffer(version, 4);
     const depth = numberToBuffer(this.depth, 1);
     const parentFingerprint = numberToBuffer(this.parentFingerprint, 4);
     const index = numberToBuffer(this.index, 4);
 
-    const buffer = Buffer.concat([versionBuffer, depth, parentFingerprint, index, this.chainCode, key]);
+    const buffer = concat([versionBuffer, depth, parentFingerprint, index, this.chainCode, key]);
 
     return encodeBase58(buffer);
   }

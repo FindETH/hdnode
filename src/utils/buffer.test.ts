@@ -1,24 +1,83 @@
-import { Buffer } from 'buffer';
-import { dehexify, hexify, numberToBuffer } from './buffer';
+import { TextEncoder, TextDecoder } from 'util';
+import {
+  fromHex,
+  toHex,
+  numberToBuffer,
+  getTextEncoder,
+  toBuffer,
+  concat,
+  getTextDecoder,
+  toUtf8,
+  fromUtf8
+} from './buffer';
 
-describe('hexify', () => {
-  it('gets a hexadecimal string from a buffer', () => {
-    const buffer = Buffer.from('123456abcdef', 'hex');
-    expect(hexify(buffer)).toBe('123456abcdef');
+describe('getTextEncoder', () => {
+  it('returns an instance of TextEncoder', () => {
+    expect(getTextEncoder()).toBeInstanceOf(TextEncoder);
   });
 });
 
-describe('dehexify', () => {
+describe('getTextDecoder', () => {
+  it('returns an instance of TextDecoder', () => {
+    expect(getTextDecoder()).toBeInstanceOf(TextDecoder);
+  });
+});
+
+describe('toHex', () => {
+  it('gets a hexadecimal string from a buffer', () => {
+    const buffer = fromHex('123456abcdef');
+    expect(toHex(buffer)).toBe('123456abcdef');
+  });
+});
+
+describe('fromHex', () => {
   it('gets a buffer from a hexadecimal string', () => {
-    expect(dehexify('abcdef')).toBeInstanceOf(Buffer);
-    expect(dehexify('abcdef').toString('hex')).toBe('abcdef');
+    expect(fromHex('abcdef')).toBeInstanceOf(Uint8Array);
+    expect(toHex(fromHex('abcdef'))).toBe('abcdef');
   });
 
   it('works with and without prefixed 0x', () => {
-    const withoutPrefix = dehexify('abcdef');
-    const withPrefix = dehexify('0xabcdef');
+    const withoutPrefix = fromHex('abcdef');
+    const withPrefix = fromHex('0xabcdef');
 
     expect(withoutPrefix).toStrictEqual(withPrefix);
+  });
+
+  it('throws if the hexadecimal string has an uneven length', () => {
+    expect(() => fromHex('123')).toThrow();
+  });
+
+  it('throws if the data has invalid characters', () => {
+    expect(() => fromHex('foobar')).toThrow();
+  });
+});
+
+describe('toBuffer', () => {
+  it('gets a buffer from a hexadecimal string', () => {
+    expect(toBuffer('abcdef')).toBeInstanceOf(Uint8Array);
+    expect(toHex(toBuffer('abcdef'))).toBe('abcdef');
+  });
+
+  it('gets a buffer from another buffer', () => {
+    expect(toBuffer(toBuffer('abcdef'))).toBeInstanceOf(Uint8Array);
+    expect(toHex(toBuffer(toBuffer('abcdef')))).toBe('abcdef');
+  });
+
+  it('gets a buffer from a number array', () => {
+    expect(toBuffer([0xab, 0xcd, 0xef])).toBeInstanceOf(Uint8Array);
+    expect(toHex(toBuffer([0xab, 0xcd, 0xef]))).toBe('abcdef');
+  });
+});
+
+describe('toUtf8', () => {
+  it('gets a string from a buffer', () => {
+    expect(toUtf8(toBuffer('666f6f626172'))).toBe('foobar');
+  });
+});
+
+describe('fromUtf8', () => {
+  it('gets a buffer from a string', () => {
+    expect(toHex(fromUtf8('foobar'))).toBe('666f6f626172');
   });
 });
 
@@ -26,7 +85,13 @@ describe('numberToBuffer', () => {
   it('writes a number to a new buffer', () => {
     expect(numberToBuffer(1234, 2)).toHaveLength(2);
     expect(numberToBuffer(1234, 4)).toHaveLength(4);
-    expect(numberToBuffer(1234, 2).toString('hex')).toBe('04d2');
-    expect(numberToBuffer(1234, 4).toString('hex')).toBe('000004d2');
+    expect(toHex(numberToBuffer(1234, 2))).toBe('04d2');
+    expect(toHex(numberToBuffer(1234, 4))).toBe('000004d2');
+  });
+});
+
+describe('concat', () => {
+  it('concatenates multiple buffers', () => {
+    expect(toHex(concat([toBuffer('12'), toBuffer('34')]))).toBe('1234');
   });
 });

@@ -56,10 +56,10 @@
   },
   "dependencies": {
     "base-x": "^3.0.8",
-    "buffer": "^6.0.1",
     "create-hash": "^1.2.0",
     "create-hmac": "^1.1.7",
     "elliptic": "^6.5.3",
+    "get-random-values": "^1.2.2",
     "keccak": "^3.0.1",
     "pbkdf2": "^3.1.1"
   },

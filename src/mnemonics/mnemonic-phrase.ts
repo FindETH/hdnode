@@ -1,17 +1,15 @@
-import { Buffer } from 'buffer';
-import { randomBytes } from 'crypto';
-import { pbkdf2, sha256 } from '../utils';
+import { fromUtf8, getRandomBytes, pbkdf2, sha256, toBuffer } from '../utils';
 import { ENGLISH_WORDLIST } from './wordlists';
 
 export type Bit = 0 | 1;
 
 /**
- * Get the checksum for an entropy buffer.
+ * Get the checksum for entropy.
  *
- * @param {Buffer} entropy
+ * @param {Uint8Array} entropy
  * @return {Bit[]}
  */
-export const getChecksum = (entropy: Buffer): Bit[] => {
+export const getChecksum = (entropy: Uint8Array): Bit[] => {
   return bufferToBits(sha256(entropy)).slice(0, entropy.length / 4);
 };
 
@@ -30,7 +28,7 @@ export const generateMnemonic = (size: number): string => {
     throw new Error('Size must be a multiple of 32');
   }
 
-  const entropy = randomBytes(size / 8);
+  const entropy = getRandomBytes(size / 8);
   return entropyToMnemonic(entropy);
 };
 
@@ -38,10 +36,10 @@ export const generateMnemonic = (size: number): string => {
  * Get a mnemonic phrase from pre-generated entropy. Note that the entropy should be sufficiently random in order for
  * the mnemonic phrase to be secure.
  *
- * @param {Buffer} entropy
+ * @param {Uint8Array} entropy
  * @return {string}
  */
-export const entropyToMnemonic = (entropy: Buffer): string => {
+export const entropyToMnemonic = (entropy: Uint8Array): string => {
   const checksum = getChecksum(entropy);
   const bits = [...bufferToBits(entropy), ...checksum];
 
@@ -53,11 +51,11 @@ export const entropyToMnemonic = (entropy: Buffer): string => {
  *
  * @param {string} mnemonic
  * @param {string} [passphrase]
- * @return {Buffer}
+ * @return {Uint8Array}
  */
-export const mnemonicToSeed = (mnemonic: string, passphrase?: string): Buffer => {
-  const buffer = Buffer.from(normalise(mnemonic), 'utf8');
-  const salt = Buffer.from(normalise('mnemonic' + (passphrase || '')), 'utf8');
+export const mnemonicToSeed = (mnemonic: string, passphrase?: string): Uint8Array => {
+  const buffer = fromUtf8(normalise(mnemonic));
+  const salt = fromUtf8(normalise('mnemonic' + (passphrase || '')));
 
   return pbkdf2(buffer, salt);
 };
@@ -66,9 +64,9 @@ export const mnemonicToSeed = (mnemonic: string, passphrase?: string): Buffer =>
  * Get the initial entropy from a mnemonic phrase. Throws an error if the mnemonic phrase is invalid.
  *
  * @param {string} mnemonic
- * @return {Buffer}
+ * @return {Uint8Array}
  */
-export const mnemonicToEntropy = (mnemonic: string): Buffer => {
+export const mnemonicToEntropy = (mnemonic: string): Uint8Array => {
   const words = normalise(mnemonic).split(' ');
 
   if (words.length < 12 || words.length > 24 || words.length % 3 !== 0) {
@@ -130,12 +128,12 @@ export const getMnemonicWord = (bits: Bit[]): string => {
 };
 
 /**
- * Get a bit array from a Buffer.
+ * Get a bit array from a Uint8Array.
  *
- * @param {Buffer} buffer
+ * @param {Uint8Array} buffer
  * @return {Bit[]}
  */
-export const bufferToBits = (buffer: Buffer): Bit[] => {
+export const bufferToBits = (buffer: Uint8Array): Bit[] => {
   const bits = Array.from(buffer)
     .map((byte) => byte.toString(2).padStart(8, '0'))
     .join('');
@@ -144,17 +142,17 @@ export const bufferToBits = (buffer: Buffer): Bit[] => {
 };
 
 /**
- * Get a Buffer from a bit array.
+ * Get a Uint8Array from a bit array.
  *
- * @param {Buffer} bits
- * @return {Buffer}
+ * @param {Uint8Array} bits
+ * @return {Uint8Array}
  */
-export const bitsToBuffer = (bits: Bit[]): Buffer => {
+export const bitsToBuffer = (bits: Bit[]): Uint8Array => {
   const bytes = chunk(bits, 8)
     .map((array) => array.join(''))
     .map((array) => parseInt(array, 2));
 
-  return Buffer.from(bytes);
+  return toBuffer(bytes);
 };
 
 /**
