@@ -58,7 +58,7 @@ export const fromHex = (data: string): Uint8Array => {
   }
 
   if (data.length % 2 !== 0) {
-    throw new Error('Length must be divisible by two');
+    throw new Error('Length must be even');
   }
 
   if (!data.match(HEX_REGEX)) {
@@ -82,10 +82,22 @@ export const toBuffer = (data: BinaryLike): Uint8Array => {
   return new Uint8Array(data);
 };
 
+/**
+ * Get a buffer as UTF-8 encoded string.
+ *
+ * @param {Uint8Array} data
+ * @return {string}
+ */
 export const toUtf8 = (data: Uint8Array): string => {
   return getTextDecoder().decode(data);
 };
 
+/**
+ * Get a UTF-8 encoded string as buffer.
+ *
+ * @param {string} data
+ * @return {Uint8Array}
+ */
 export const fromUtf8 = (data: string): Uint8Array => {
   return getTextEncoder().encode(data);
 };
