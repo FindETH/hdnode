@@ -1,5 +1,5 @@
-import { Buffer } from 'buffer';
 import baseX from 'base-x';
+import { concat, toBuffer } from './buffer';
 import { sha256 } from './hash';
 
 const BASE_58_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -11,10 +11,10 @@ export const base58 = baseX(BASE_58_CHARACTERS);
  * @param {Buffer} data
  * @return {string}
  */
-export const encodeBase58 = (data: Buffer): string => {
-  const checksum = sha256(sha256(data));
+export const encodeBase58 = (data: Uint8Array): string => {
+  const checksum = sha256(sha256(data)).slice(0, 4);
 
-  return base58.encode(Buffer.concat([data, checksum], data.length + 4));
+  return base58.encode(concat([data, checksum]));
 };
 
 /**
@@ -23,7 +23,7 @@ export const encodeBase58 = (data: Buffer): string => {
  * @param {string} encoded
  * @return {Buffer}
  */
-export const decodeBase58 = (encoded: string): Buffer => {
+export const decodeBase58 = (encoded: string): Uint8Array => {
   const buffer = base58.decode(encoded);
 
   const data = buffer.slice(0, -4);
@@ -34,5 +34,5 @@ export const decodeBase58 = (encoded: string): Buffer => {
     throw new Error('Invalid checksum');
   }
 
-  return data;
+  return toBuffer(data);
 };

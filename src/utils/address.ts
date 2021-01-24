@@ -1,5 +1,4 @@
-import { Buffer } from 'buffer';
-import { hexify } from './buffer';
+import { fromUtf8, toHex } from './buffer';
 import { decompressPublicKey } from './elliptic';
 import { keccak256 } from './hash';
 
@@ -10,7 +9,7 @@ import { keccak256 } from './hash';
  * @return {string}
  */
 export const toChecksumAddress = (address: string): string => {
-  const hash = keccak256(Buffer.from(address, 'utf8')).toString('hex');
+  const hash = toHex(keccak256(fromUtf8(address)));
 
   return address.split('').reduce<string>((addressWithChecksum, character, index) => {
     if (parseInt(hash[index], 16) >= 8) {
@@ -27,9 +26,9 @@ export const toChecksumAddress = (address: string): string => {
  * @param {Buffer} publicKey
  * @return {string}
  */
-export const getAddress = (publicKey: Buffer): string => {
+export const getAddress = (publicKey: Uint8Array): string => {
   const buffer = decompressPublicKey(publicKey).subarray(1);
 
-  const hash = hexify(keccak256(buffer).subarray(-20));
+  const hash = toHex(keccak256(buffer).subarray(-20));
   return toChecksumAddress(hash);
 };
