@@ -60,10 +60,11 @@
     "create-hmac": "^1.1.7",
     "elliptic": "^6.5.3",
     "get-random-values": "^1.2.2",
+    "keccak": "^3.0.1",
     "pbkdf2": "^3.1.1"
   },
   "peerDependencies": {
-    "@findeth/abi": ">= 0.4.1 < 1.0.0"
+    "@findeth/abi": ">= 0.5.0 < 1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
@@ -75,11 +76,12 @@
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
-    "@findeth/abi": "^0.4.1",
+    "@findeth/abi": "^0.5.2",
     "@types/create-hash": "^1.2.2",
     "@types/create-hmac": "^1.1.0",
     "@types/elliptic": "^6.4.12",
     "@types/jest": "^26.0.15",
+    "@types/keccak": "^3.0.1",
     "@types/node": "^14.14.5",
     "@types/pbkdf2": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
