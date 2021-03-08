@@ -1,6 +1,6 @@
 {
   "name": "@findeth/hdnode",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Small HD wallet key derivation library",
   "author": "Maarten Zuidhoorn <maarten@zuidhoorn.com>",
   "homepage": "https://github.com/FindETH/hdnode",
