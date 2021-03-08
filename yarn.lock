@@ -1034,12 +1034,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@findeth/abi@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@findeth/abi/-/abi-0.4.1.tgz#267c540321142a5e8b838743d4896b1c20ecd1e2"
-  integrity sha512-kpe0gmZh1QzruJGx4Shj11Xq7XudC3OvqVmzFdOXnaVuPXSOkucJkmpzZYPIZcKlXEtIJ8/JHhfxo/eT7vGGGQ==
-  dependencies:
-    keccak "^3.0.1"
+"@findeth/abi@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@findeth/abi/-/abi-0.5.2.tgz#7e619325f2ed54ecd5cafbba0178431576d680e9"
+  integrity sha512-SBov6XUWdMUcYPJCz80G0gQJwDt5sYU5g8KpBUkizNyei3367uEqFINgiB0/bm1DJ1gcv9Yjlb8/OngfbXPVPg==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -1402,6 +1400,13 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+
+"@types/keccak@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/keccak/-/keccak-3.0.1.tgz#1dfad12395f32927cf409707534dd796d57aa84c"
+  integrity sha512-/MxAVmtyyeOvZ6dGf3ciLwFRuV5M8DRIyYNFGHYI6UyBW4/XqyO0LZw+JFMvaeY3cHItQAkELclBU1x5ank6mg==
+  dependencies:
+    "@types/node" "*"
 
 "@types/node@*", "@types/node@^14.14.5":
   version "14.14.32"

@@ -1,5 +1,5 @@
 import { fromUtf8, toHex } from './buffer';
-import { hmacSHA512, pbkdf2, ripemd160, sha256 } from './hash';
+import { hmacSHA512, keccak256, pbkdf2, ripemd160, sha256 } from './hash';
 
 const TEST_STRING = fromUtf8('foo bar');
 const TEST_SALT = fromUtf8('baz qux');
@@ -21,6 +21,17 @@ describe('sha256', () => {
 describe('ripemd160', () => {
   it('hashes a buffer with RIPEMD160', () => {
     expect(toHex(ripemd160(TEST_STRING))).toBe('36297e108170a41b2e60a8b5897f2148ef39787a');
+  });
+});
+
+describe('keccak256', () => {
+  it('returns the keccak256 hash of a string', () => {
+    expect(toHex(keccak256(fromUtf8('transfer(address,uint256)')))).toBe(
+      'a9059cbb2ab09eb219583f4a59a5d0623ade346d962bcd4e46b11da047c9049b'
+    );
+    expect(toHex(keccak256(fromUtf8('approve(address,uint256)')))).toBe(
+      '095ea7b334ae44009aa867bfb386f5c3b4b443ac6f0ee573fa91c4608fbadfba'
+    );
   });
 });
 
