@@ -88,7 +88,7 @@ export class HDNode {
 
     const version = dataView.getUint32(0);
     if (version !== PUBLIC_KEY_VERSION && version !== PRIVATE_KEY_VERSION) {
-      throw new Error('Invalid extended key: expected public of private version');
+      throw new Error('Invalid extended key: expected public or private version');
     }
 
     const depth = dataView.getUint8(4);
