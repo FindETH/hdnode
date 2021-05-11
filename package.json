@@ -77,7 +77,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
-    "@findeth/abi": "^0.5.2",
+    "@findeth/abi": "^0.7.1",
     "@types/create-hash": "^1.2.2",
     "@types/create-hmac": "^1.1.0",
     "@types/elliptic": "^6.4.12",
